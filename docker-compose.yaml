@@ -1,0 +1,33 @@
+version: '3.7'
+
+services:
+  yapi:
+    image: thinkgos/yapi
+    container_name: yapi
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    # volumes:
+    #   - ~/data/yapi/log/yapi.log:/home/vendors/log # log dir
+    depends_on:
+      - mongo
+    networks:
+      - yapi
+
+  mongo:
+    image: mongo:4.4.5
+    container_name: mongo
+    restart: unless-stopped
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    ports:
+      - 27017:27017
+    volumes:
+      - $PWD/data/mongodb:/data/db
+    networks:
+      - yapi
+
+networks:
+  yapi:
+    driver: bridge
