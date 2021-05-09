@@ -2,6 +2,9 @@
  
 目前最简易的`docker`布署`yapi`方式
 
+## 前置条件
+   需安装`docker`和`docker-compose` (废话)
+
 ## 使用说明
 
 - 修改`Dockerfile` 可以指定目标版本
